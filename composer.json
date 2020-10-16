@@ -13,6 +13,7 @@
         "joshtronic/php-loremipsum": "^1.0",
         "michalsn/codeigniter4-uuid": "^1.0@beta",
         "tatter/relations": "^2.0",
+        "adnduweb/ci4_admin" : "*", 
         "adnduweb/ci4_logs" : "*", 
         "adnduweb/ci4_settings" : "*"
     }
