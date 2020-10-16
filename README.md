@@ -1,2 +1,2 @@
 # ci4_core
-Core de L'applciation Codeigniter
+Core de L'application Codeigniter 4
