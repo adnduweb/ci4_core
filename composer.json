@@ -2,17 +2,20 @@
 {
     "name": "adnduweb/ci4_core",
     "license": "MIT",
+    "description": "An Example of CodeIgniter 4 Core module",
     "autoload": {
         "psr-4": {
-            "Adnduweb\\Core\\" : "Core/",
-            "Adnduweb\\Helpers\\" : "Helpers/"
+            "Adnduweb\\Ci4Core\\" : "Core/",
+            "Adnduweb\\Ci4Helpers\\" : "Helpers/"
         }
     },
     "require": {
         "joshtronic/php-loremipsum": "^1.0",
         "michalsn/codeigniter4-uuid": "^1.0@beta",
         "tatter/relations": "^2.0",
-        "adnduweb/ci4_logs" : "*", 
-        "adnduweb/ci4_settings" : "*"
+        "adnduweb/ci4_logs" : "*",
+        "adnduweb/ci4_settings" : "*",
+        "adnduweb/ci4_admin" : "*"
+
     }
 }

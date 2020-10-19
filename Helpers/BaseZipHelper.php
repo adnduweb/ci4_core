@@ -4,7 +4,7 @@
  * @license MIT
  * @link http://basic-app.com
  */
-namespace Adnduweb\Core\Helpers;
+namespace Adnduweb\Ci4Core\Helpers;
 
 class BaseZipHelper extends \denis303\php\ZipHelper
 {

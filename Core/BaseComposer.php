@@ -4,27 +4,27 @@
  * @license MIT
  * @link http://basic-app.com
  */
-namespace Adnduweb\Core\Core;
+namespace Adnduweb\Ci4Core\Core;
 
 use Exception;
-use Adnduweb\Core\Helpers\CliHelper;
+use Adnduweb\Ci4Core\Helpers\CliHelper;
 
 abstract class BaseComposer extends \Composer\Installer\LibraryInstaller
 {
 
     public static function postCreateProject($event)
     {
-        static::runCommands($event, 'Adnduweb\Core\Composer::postCreateProject');
+        static::runCommands($event, 'Adnduweb\Ci4Core\Composer::postCreateProject');
     }
 
     public static function postInstall($event)
     {
-        static::runCommands($event, 'Adnduweb\Core\Composer::postInstall');
+        static::runCommands($event, 'Adnduweb\Ci4Core\Composer::postInstall');
     }
 
     public static function postUpdate($event)
     {
-        static::runCommands($event, 'Adnduweb\Core\Core\Composer::postUpdate');
+        static::runCommands($event, 'Adnduweb\Ci4Core\Core\Composer::postUpdate');
     }
 
     protected static function runCommands($event, $extraKey)
