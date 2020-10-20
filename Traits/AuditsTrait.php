@@ -1,4 +1,4 @@
-<?php namespace Adnduweb\Ci4Traits;
+<?php namespace Adnduweb\Ci4Core\Traits;
 
 use CodeIgniter\Config\Services;
 use Adnduweb\Ci4Core\Models\AuditModel;
