@@ -1,4 +1,6 @@
-<?php namespace Adnduweb\Ci4Core\Config;
+<?php 
+
+namespace Adnduweb\Ci4Core\Config;
 
 use CodeIgniter\Events\Events;
 

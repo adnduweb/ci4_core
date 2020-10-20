@@ -1,4 +1,6 @@
-<?php namespace Adnduweb\Ci4Core\Config;
+<?php 
+echo 'fgsfdghdfhdf'; exit;
+namespace Adnduweb\Ci4Core\Config;
 
 use CodeIgniter\Config\BaseService;
 use CodeIgniter\Database\ConnectionInterface;

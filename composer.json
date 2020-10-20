@@ -5,8 +5,10 @@
     "description": "An Example of CodeIgniter 4 Core module",
     "autoload": {
         "psr-4": {
+            "Adnduweb\\Ci4Config\\" : "Config/",
             "Adnduweb\\Ci4Core\\" : "Core/",
             "Adnduweb\\Ci4Helpers\\" : "Helpers/",
+            "Adnduweb\\Ci4Models\\" : "Models/",
             "Adnduweb\\Ci4Traits\\" : "Traits/"
         }
     },
