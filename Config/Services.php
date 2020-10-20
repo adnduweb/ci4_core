@@ -16,7 +16,7 @@ class Services extends BaseService
 		if (empty($config))
 			$config = config('Settings');
 
-		return new \Adnduweb\Ci4Core\Settings($config);
+		return new \Adnduweb\Ci4Core\BaseSettings($config);
 	}
 
 	public static function audits(BaseConfig $config = null, bool $getShared = true)
@@ -30,6 +30,6 @@ class Services extends BaseService
 			$config = config('Audits');
 		}
 
-		return new \Adnduweb\Ci4Core\Audits($config);
+		return new \Adnduweb\Ci4Core\BaseAudits($config);
 	}
 }

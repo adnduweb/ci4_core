@@ -1,6 +1,6 @@
 <?php
 
-namespace Adnduweb\Ci4Core;
+namespace Adnduweb\Ci4Core\Core;
 
 use CodeIgniter\Config\BaseConfig;
 use Adnduweb\Ci4Core\Models\AuditModel;
@@ -8,7 +8,7 @@ use Adnduweb\Ci4Core\Models\AuditModel;
 //use Adnduweb\Ci4Core\Exceptions\AuditsException;
 
 /*** CLASS ***/
-class Audits
+class BaseAudits
 {
     /**
      * Our configuration instance.

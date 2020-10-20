@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "Adnduweb\\Ci4Core\\" : "Core/",
-            "Adnduweb\\Ci4Helpers\\" : "Helpers/"
+            "Adnduweb\\Ci4Helpers\\" : "Helpers/",
+            "Adnduweb\\Ci4Traits\\" : "Traits/"
         }
     },
     "require": {
