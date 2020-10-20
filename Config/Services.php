@@ -1,5 +1,5 @@
 <?php 
-echo 'fgsfdghdfhdf'; exit;
+
 namespace Adnduweb\Ci4Core\Config;
 
 use CodeIgniter\Config\BaseService;
@@ -18,7 +18,7 @@ class Services extends BaseService
 		if (empty($config))
 			$config = config('Settings');
 
-		return new \Adnduweb\Ci4Core\BaseSettings($config);
+		return new \Adnduweb\Ci4Core\Core\BaseSettings($config);
 	}
 
 	public static function audits(BaseConfig $config = null, bool $getShared = true)
@@ -32,6 +32,6 @@ class Services extends BaseService
 			$config = config('Audits');
 		}
 
-		return new \Adnduweb\Ci4Core\BaseAudits($config);
+		return new \Adnduweb\Ci4Core\Core\BaseAudits($config);
 	}
 }
