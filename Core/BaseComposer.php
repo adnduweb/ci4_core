@@ -1,9 +1,5 @@
 <?php
-/**
- * @author Basic App Dev Team <dev@basic-app.com>
- * @license MIT
- * @link http://basic-app.com
- */
+
 namespace Adnduweb\Ci4Core\Core;
 
 use Exception;
@@ -14,17 +10,17 @@ abstract class BaseComposer extends \Composer\Installer\LibraryInstaller
 
     public static function postCreateProject($event)
     {
-        static::runCommands($event, 'Adnduweb\Ci4Core\Composer::postCreateProject');
+        static::runCommands($event, 'Adnduweb\Ci4Core\Core\BaseComposer::postCreateProject');
     }
 
     public static function postInstall($event)
     {
-        static::runCommands($event, 'Adnduweb\Ci4Core\Composer::postInstall');
+        static::runCommands($event, 'Adnduweb\Ci4Core\Core\BaseComposer::postInstall');
     }
 
     public static function postUpdate($event)
     {
-        static::runCommands($event, 'Adnduweb\Ci4Core\Core\Composer::postUpdate');
+        static::runCommands($event, 'Adnduweb\Ci4Core\Core\BaseComposer::postUpdate');
     }
 
     protected static function runCommands($event, $extraKey)

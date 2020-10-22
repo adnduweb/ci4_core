@@ -77,7 +77,7 @@ class BaseSettings
 		// 	return false;
 		// }
 		//print_r($this->builder);
-		if (!db_connect()->tableExists('ci_sessions')) {
+		if (!db_connect()->tableExists('sessions')) {
 			// some code...
 			return false;
 		}
@@ -131,7 +131,7 @@ class BaseSettings
 	// get a setting - checks session, then user, then global
 	public function get(string $name)
 	{
-		log_message('error', print_r($name, true));
+		//log_message('error', print_r($name, true)); 
 		$setting = $this->getTemplate($name);
 		//echo 'fsdgsdgsfdg'; exit;
 		if (empty($setting))

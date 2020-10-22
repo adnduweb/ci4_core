@@ -5,7 +5,7 @@ use CodeIgniter\CLI\CLI;
 
 class SettingsList extends BaseCommand
 {
-    protected $group       = 'Settings';
+    protected $group       = 'Adnduweb';
     protected $name        = 'settings:list';
     protected $description = 'Lists setting templates from the database.';
 

@@ -6,7 +6,7 @@ use Adnduweb\Ci4Core\Models\SettingModel;
 
 class SettingsAdd extends BaseCommand
 {
-    protected $group       = 'Settings';
+    protected $group       = 'Adnduweb';
     protected $name        = 'settings:add';
     protected $description = "Adds a setting template to the database.";
 
