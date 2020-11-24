@@ -21,7 +21,7 @@ class Compression implements FilterInterface
     // print_r($request->uri->getSegments());
     // exit;
     if (service('Settings')->setting_activer_multilangue == true) {
-      if ($request->uri->getSegments()[0] != env('CI_SITE_AREA')) {
+      if ($request->uri->getSegments()[0] != env('CI_AREA_ADMIN')) {
 
         // Do something here
         if (env('assets.compressionHtml') == true) {
@@ -57,9 +57,9 @@ class Compression implements FilterInterface
       }
     } else {
 
-      //if (!is_array($request->uri->getSegments()) && $request->uri->getSegments()[0] != env('CI_SITE_AREA')) {
+      //if (!is_array($request->uri->getSegments()) && $request->uri->getSegments()[0] != env('CI_AREA_ADMIN')) {
       //var_dump($request->uri->getSegments()); exit;
-      if (!in_array(env('CI_SITE_AREA'), $request->uri->getSegments())) {
+      if (!in_array(env('CI_AREA_ADMIN'), $request->uri->getSegments())) {
 
         // Do something here
         if (env('assets.compressionHtml') == true) {

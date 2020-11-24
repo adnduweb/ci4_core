@@ -46,7 +46,7 @@ trait AuditsTrait
 			return false;
 
 		$audit = [
-			'source'    => $this->localizeFile,
+			'source'    => $this->table,
 			'source_id' => $this->db->insertID() . '2',
 			'event'     => 'insert',
 			'summary'   => count($data['data']) . ' rows',
@@ -61,7 +61,7 @@ trait AuditsTrait
 	protected function auditUpdate(array $data)
 	{
 		$audit = [
-			'source'    => $this->localizeFile,
+			'source'    => $this->table,
 			'source_id' => is_array($data['id']) ? $data['id'][0] : $data['id'],
 			'event'     => 'update',
 			'summary'   => count($data['data']) . ' rows',

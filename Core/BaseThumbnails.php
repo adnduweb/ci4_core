@@ -1,4 +1,6 @@
-<?php namespace Tatter\Thumbnails;
+<?php 
+
+namespace Adnduweb\Ci4Core\Core;
 
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Services;

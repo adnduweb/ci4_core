@@ -86,7 +86,7 @@ trait BaseModel
             $this->builder->where($like);
 
             if ($this->tableLang == true) {
-                $this->builder->where('id_lang = ' . service('switchlanguage')->getIdLocale());
+                $this->builder->where('id_lang = ' . service('LanguageOverride')->getIdLocale());
             }
 
             $this->builder->limit(0, $page);
@@ -97,7 +97,7 @@ trait BaseModel
             }
 
             if ($this->tableLang == true) {
-                $this->builder->where('id_lang = ' . service('switchlanguage')->getIdLocale());
+                $this->builder->where('id_lang = ' . service('LanguageOverride')->getIdLocale());
             }
 
             $page = ($page == '1') ? '0' : (($page - 1) * $perpage);
@@ -140,7 +140,7 @@ trait BaseModel
             $this->builder->where($like);
 
             if ($this->tableLang == true) {
-                $this->builder->where('id_lang = ' . service('switchlanguage')->getIdLocale());
+                $this->builder->where('id_lang = ' . service('LanguageOverride')->getIdLocale()); 
             }
         } else {
 
@@ -149,7 +149,7 @@ trait BaseModel
             }
 
             if ($this->tableLang == true) {
-                $this->builder->where('id_lang = ' . service('switchlanguage')->getIdLocale());
+                $this->builder->where('id_lang = ' . service('LanguageOverride')->getIdLocale());
             }
         }
 
@@ -180,7 +180,7 @@ trait BaseModel
     {
         $this->builder->select($this->table . '.' . $this->primaryKey . ', active');
         $this->builder->join($this->tableLang, $this->table . '.' . $this->primaryKey . ' = ' . $this->tableLang . '.' . $this->primaryKeyLang);
-        $this->builder->where('deleted_at IS NULL AND slug="' . $slug . '" AND id_lang="' . service('switchlanguage')->getIdLocale() . '"');
+        $this->builder->where('deleted_at IS NULL AND slug="' . $slug . '" AND id_lang="' . service('LanguageOverride')->getIdLocale() . '"');
         $page = $this->builder->get()->getRow();
         if (!empty($page)) {
             if ($page->active == '1')

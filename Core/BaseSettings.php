@@ -96,6 +96,7 @@ class BaseSettings
 			return $setting;
 
 		// fetch from the database
+		$this->model = new SettingModel();
 		$setting = $this->model->where('name', $name)->first();
 		if (empty($setting)) :
 			if ($this->config->silent) :
@@ -115,7 +116,8 @@ class BaseSettings
 		if ($content === null)
 			return cache()->delete($key);
 
-		if ($duration = $this->config->cacheDuration)
+		//if ($duration = $this->config->cacheDuration)
+		if ($duration = config('settings')->cacheDuration)
 			cache()->save($key, $content, $duration);
 		return $content;
 	}
@@ -168,7 +170,7 @@ class BaseSettings
 	protected function getSession($setting)
 	{
 		// prefix to avoid collision
-		return $this->session->get('settings-contents-' . $setting->name) ?? null;
+		return service('session')->get('settings-contents-' . $setting->name) ?? null;
 	}
 
 	// checks the database for a user-defined setting
@@ -179,7 +181,7 @@ class BaseSettings
 			$userId = $this->sessionUserId();
 
 		// look for a user-defined setting
-		$result = $this->builder
+		$result = db_connect()->table('settings_users')
 			->where('setting_id', $setting->id)
 			->where('user_id', $userId)
 			->limit(1)->get()->getResult();

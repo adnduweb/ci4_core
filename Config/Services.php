@@ -3,9 +3,10 @@
 namespace Adnduweb\Ci4Core\Config;
 
 use CodeIgniter\Config\BaseService;
-use CodeIgniter\Database\ConnectionInterface;
-use  Adnduweb\Ci4Core\Config\Thumbnails as ThumbnailsConfig;
-use  Adnduweb\Ci4Core\Core\Thumbnails;
+//use CodeIgniter\Database\ConnectionInterface;
+use Adnduweb\Ci4Core\Models\LanguageModel;
+use Adnduweb\Ci4Core\Config\Thumbnails as ThumbnailsConfig;
+use Adnduweb\Ci4Core\Core\Thumbnails;
 
 class Services extends BaseService
 {
@@ -55,4 +56,27 @@ class Services extends BaseService
 
 		return new Thumbnails($config ?? config('Thumbnails'));
 	}
+
+
+	public static function LanguageOverride(BaseConfig $config = null,  Model $LanguageModel = null, bool $getShared = true)
+	{
+		if ($getShared) {
+			return static::getSharedInstance('LanguageOverride', $config, $LanguageModel);
+		}
+
+		$instance = new \Adnduweb\Ci4Core\Core\Language($config);
+
+        if (empty($LanguageModel)) {
+            $LanguageModel = new LanguageModel();
+        }
+
+
+		// If no config was injected then load one
+		if (empty($config)) {
+			$config = config('LanguageOverride');
+		}
+
+		return $instance->setLanguageModel($LanguageModel);
+	}
+
 }

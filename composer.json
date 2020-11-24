@@ -10,6 +10,12 @@
     "require": {
         "joshtronic/php-loremipsum": "^1.0",
         "michalsn/codeigniter4-uuid": "^1.0@beta",
+        "giggsey/libphonenumber-for-php": "^8.12",
+        "fakerphp/faker": "^1.10",
+        "filp/whoops": "^2.9",
+        "tecnickcom/tcpdf": "^6.3",
+        "firebase/php-jwt": "^5.2",
+        "whichbrowser/parser": "^2.0",
         "tatter/handlers": "^2.0",
         "tatter/relations": "^2.0",
         "adnduweb/ci4_admin": "*"

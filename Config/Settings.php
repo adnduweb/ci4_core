@@ -14,5 +14,5 @@ class Settings extends BaseConfig
 	public $cacheDuration = 300;
 
 	// whether to continue instead of throwing exceptions
-	public $silent = false;
+	public $silent = true;
 }

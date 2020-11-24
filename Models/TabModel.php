@@ -43,7 +43,7 @@ class TabModel extends Model
         $contructArrayTab = [];
         $tab = $this->tabs->select()
             ->join('tabs_langs', 'tabs.id = tabs_langs.tab_id')
-            ->where(['id_parent' => 0, 'id_lang' => service('switchlanguage')->getIdLocale(), 'active' => 1])
+            ->where(['id_parent' => 0, 'id_lang' => service('LanguageOverride')->getIdLocale(), 'active' => 1])
             ->orderBy('left', 'ASC')
             ->get()->getResult();
         if (!empty($tab)) {

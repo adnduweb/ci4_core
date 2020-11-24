@@ -25,6 +25,6 @@ class CountryModel extends Model
 
     public function getAllCountry()
     {
-        return $this->db->table($this->table)->where('id_lang', service('switchlanguage')->getIdLocale())->orderBy('name ASC')->get()->getResult();
+        return $this->db->table($this->table)->where('id_lang', service('LanguageOverride')->getIdLocale())->orderBy('name ASC')->get()->getResult();
     }
 }

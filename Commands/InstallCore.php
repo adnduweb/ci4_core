@@ -58,13 +58,13 @@ class InstallCore extends BaseCommand
         //     $name = CLI::prompt('Nom de l\'application', null, 'required');
         if (empty($url))
             $url = CLI::prompt('Url de l\'application', null, 'required');
-        if (empty($CI_SITE_AREA))
-            $CI_SITE_AREA = CLI::prompt('Login caché', null, 'required');
+        if (empty($CI_AREA_ADMIN))
+            $CI_AREA_ADMIN = CLI::prompt('Login caché', null, 'required');
 
         try {
             //InstallCore::replaceInfile('app.nameApp = ""', 'app.nameApp = "' . $name . '"');
             InstallCore::replaceInfile('app.baseURL = "https://www.exemple.com"', 'app.baseURL = "' . $url . '"');
-            InstallCore::replaceInfile('app.areaAdmin = ""', 'app.areaAdmin = "' . $CI_SITE_AREA . '"');
+            InstallCore::replaceInfile('app.areaAdmin = ""', 'app.areaAdmin = "' . $CI_AREA_ADMIN . '"');
         } catch (\Exception $e) {
             $this->showError($e);
         }
