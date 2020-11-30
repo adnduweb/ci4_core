@@ -52,21 +52,21 @@ trait BuilderEntityTrait
             }
             return $name ?? null;
         } else {
-            $name[service('switchlanguage')->getIdLocale()]['name'] =  $this->attributes['name'];
+            $name[service('LanguageOverride')->getIdLocale()]['name'] =  $this->attributes['name'];
             return $name ?? null;
         }
     }
 
 
     /** 
-     *
+     * 
      * Titre 
      */
     public function getBName()
     {
         if (isset($this->{$this->tableLang})) {
             foreach ($this->{$this->tableLang} as $lang) {
-                if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                     return $lang->name ?? null;
                 }
             }
@@ -83,7 +83,7 @@ trait BuilderEntityTrait
     {
         if (isset($this->{$this->tableLang})) {
             foreach ($this->{$this->tableLang} as $lang) {
-                if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                     return $lang->name_2 ?? null;
                 }
             }
@@ -100,7 +100,7 @@ trait BuilderEntityTrait
     {
         if (isset($this->{$this->tableLang})) {
             foreach ($this->{$this->tableLang} as $lang) {
-                if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                     return $lang->description ?? null;
                 }
             }
@@ -117,7 +117,7 @@ trait BuilderEntityTrait
     {
         if (isset($this->{$this->tableLang})) {
             foreach ($this->{$this->tableLang} as $lang) {
-                if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                     return $lang->description_short ?? null;
                 }
             }
@@ -134,7 +134,7 @@ trait BuilderEntityTrait
     {
         if (isset($this->{$this->tableLang})) {
             foreach ($this->{$this->tableLang} as $lang) {
-                if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                     return $lang->meta_description ?? null;
                 }
             }
@@ -152,7 +152,7 @@ trait BuilderEntityTrait
     {
         if (isset($this->{$this->tableLang})) {
             foreach ($this->{$this->tableLang} as $lang) {
-                if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                     return $lang->meta_title ?? null;
                 }
             }
@@ -188,7 +188,7 @@ trait BuilderEntityTrait
         if (isset($this->{$this->tableLang})) {
             if (!empty($this->{$this->primaryKey})) {
                 foreach ($this->{$this->tableLang} as $lang) {
-                    if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                    if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                         return $lang->slug ?? null;
                     }
                 }
@@ -244,7 +244,7 @@ trait BuilderEntityTrait
         foreach ($this->builders as $builder) {
             if ($id_field == $builder->id_field) {
                 foreach ($builder->builders_langs as $lang) {
-                    if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                    if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                         $builder->id_lang = $lang->id_lang;
                         $builder->content = $lang->content;
                     }
@@ -268,7 +268,7 @@ trait BuilderEntityTrait
             foreach ($this->builder as $builder) {
                 if ($id_field == $builder->id_field) {
                     foreach ($builder->builder_langs as $lang) {
-                        if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                        if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                             return $lang->content ?? null;
                         }
                     }
@@ -298,7 +298,7 @@ trait BuilderEntityTrait
             foreach ($this->builders as $builder) {
                 if ($handle == $builder->handle && $builder->type == "textareafield") {
                     foreach ($builder->builders_pages_langs as $lang) {
-                        if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                        if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                             $textarea->balise_id    = $builder->balise_id;
                             $textarea->balise_class = $builder->balise_class;
                             $textarea->content      = $lang->content ?? null;
@@ -337,7 +337,7 @@ trait BuilderEntityTrait
                     $getAttrOptions = $builder->getAttrOptions();
                     if (!empty($getAttrOptions)) {
                         foreach ($builder->builders_pages_langs as $lang) {
-                            if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+                            if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
                                 $title->balise_id    = $builder->balise_id;
                                 $title->balise_class = $builder->balise_class;
                                 $title->content      = $lang->content ?? null;
@@ -375,7 +375,7 @@ trait BuilderEntityTrait
                         return $image;
                     //print_r($getAttrOptions);
                     $mediaModel = new \App\Models\MediaModel();
-                    $image = $mediaModel->getMediaById($getAttrOptions->media->id, service('switchlanguage')->getIdLocale());
+                    $image = $mediaModel->getMediaById($getAttrOptions->media->id, service('LanguageOverride')->getIdLocale());
 
                     if (empty($image)) {
                         $image = $mediaModel->where('id', $getAttrOptions->media->id)->get()->getRow();
@@ -476,7 +476,7 @@ trait BuilderEntityTrait
 
                     $diaporamaModel = new \Adnduweb\Ci4_diaporama\Models\DiaporamaModel();
                     $slideModel = new \Adnduweb\Ci4_diaporama\Models\SlideModel();
-                    $original = $diaporamaModel->getDiaporamaFront($getAttrOptions->id, service('switchlanguage')->getIdLocale());
+                    $original = $diaporamaModel->getDiaporamaFront($getAttrOptions->id, service('LanguageOverride')->getIdLocale());
                     if (!empty($original['originalSettings'])) {
                         $diaporama->settings = $original['originalSettings'];
                         $diaporama->settings->options = $getAttrOptions;
@@ -497,7 +497,7 @@ trait BuilderEntityTrait
                                 $diaporama->slides[$i]           = $getAttrOptions->media;
                                 $diaporama->slides[$i]->id       = $builder->id;
                                 $diaporama->slides[$i]->class    = $builder->class . ' adw_lazyload ';
-                                $diaporama->slides[$i]->details  = $mediaModel->getMediaById($idMedia, service('switchlanguage')->getIdLocale());
+                                $diaporama->slides[$i]->details  = $mediaModel->getMediaById($idMedia, service('LanguageOverride')->getIdLocale());
                                 $diaporama->slides[$i]->basename = $pathinfo['basename'];
                                 $dir = str_replace([site_url() . 'uploads/', '/' . $diaporama->slides[$i]->basename], '', $getAttrOptions->media->filename);
                                 $diaporama->slides[$i]->dir      = ($dir == 'thumbnail') ?  $getAttrOptions->media->format : $dir;
@@ -609,7 +609,7 @@ trait BuilderEntityTrait
     // {
     //     if (isset($this->{$this->tableLang})) {
     //         foreach ($this->{$this->tableLang} as $lang) {
-    //             if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+    //             if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
     //                 return $lang->name ?? null;
     //             }
     //         }
@@ -627,7 +627,7 @@ trait BuilderEntityTrait
     //         }
     //         return $name ?? null;
     //     } else {
-    //         $name[service('switchlanguage')->getIdLocale()]['name'] =  $this->attributes['name'];
+    //         $name[service('LanguageOverride')->getIdLocale()]['name'] =  $this->attributes['name'];
     //         return $name ?? null;
     //     }
     // }
@@ -635,7 +635,7 @@ trait BuilderEntityTrait
     // public function getSousNameLang()
     // {
     //     foreach ($this->{$this->tableLang} as $lang) {
-    //         if (service('switchlanguage')->getIdLocale() == $lang->id_lang) {
+    //         if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
     //             return $lang->name_2 ?? null;
     //         }
     //     }

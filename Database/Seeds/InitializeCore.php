@@ -1010,7 +1010,7 @@ class InitializeCore extends \CodeIgniter\Database\Seeder
                 'class_name'      => 'tab',
                 'active'    => 1,
                 'icon'      => '',
-                'slug'      => 'tabs',
+                'slug'      => 'nav',
             ],
             [
                 'id'        => 12,

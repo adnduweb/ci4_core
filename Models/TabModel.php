@@ -79,7 +79,7 @@ class TabModel extends Model
         $tab = $this->tabs->select()
             ->join('tabs_langs', 'tabs.id = tabs_langs.tab_id')
             ->where(['id_parent' => $id, 'id_lang' => $id_lang, 'active' => 1])
-            //->orderBy('left', 'ASC')
+            ->orderBy('left', 'ASC')
             ->get()->getResult();
 
         return $tab;
