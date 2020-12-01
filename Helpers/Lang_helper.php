@@ -101,7 +101,7 @@ if (!function_exists('search_text_lang')) {
 
         // print_r($filestoexplore);
         // exit;
-        helper('String');
+        helper('string');
         $ret = array();
         $query = stringCleanUrl($query);
         // Recherche du texte
