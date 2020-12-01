@@ -7,6 +7,7 @@ use CodeIgniter\Config\BaseService;
 use Adnduweb\Ci4Core\Models\LanguageModel;
 use Adnduweb\Ci4Core\Config\Thumbnails as ThumbnailsConfig;
 use Adnduweb\Ci4Core\Core\Thumbnails;
+use Adnduweb\Ci4Core\Core\BaseVisits;
 
 class Services extends BaseService
 {
@@ -77,6 +78,20 @@ class Services extends BaseService
 		}
 
 		return $instance->setLanguageModel($LanguageModel);
+	}
+
+	public static function visits(BaseConfig $config = null, bool $getShared = true)
+    {
+		if ($getShared):
+			return static::getSharedInstance('visits', $config);
+		endif;
+
+		// If no config was injected then load one
+		// Prioritizes app/Config if found
+		if (empty($config))
+			$config = config('Visits');
+
+		return new BaseVisits($config);
 	}
 
 }

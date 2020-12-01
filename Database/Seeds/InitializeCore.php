@@ -1076,7 +1076,7 @@ class InitializeCore extends \CodeIgniter\Database\Seeder
                 'class_name'      => 'currency',
                 'active'    => 1,
                 'icon'      => '',
-                'slug'      => 'currency',
+                'slug'      => 'currencies',
             ],
             [
                 'id'        => 16,

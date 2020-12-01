@@ -18,6 +18,11 @@ Events::on('pre_system', function () {
 });
 
 
+Events::on('post_controller_constructor', function () {
+	// Ignore CLI requests
+	return is_cli() ?: service('visits')->record();
+});
+
 Events::on('post_system', function () {
 	service('audits')->save();
 });

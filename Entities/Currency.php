@@ -1,4 +1,4 @@
-<?php namespace Adnduweb\Ci4Admin\Entities;
+<?php namespace Adnduweb\Ci4Core\Entities;
 
 use CodeIgniter\Entity;
 

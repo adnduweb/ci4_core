@@ -27,7 +27,7 @@ class AuditModel extends Model
         parent::__construct();
         $this->audits = $this->db->table('audits');
     }
-
+ 
     public function getAllList(int $page, int $perpage, array $sort, array $query)
     {
         $this->audits->select();
@@ -53,7 +53,6 @@ class AuditModel extends Model
         $this->audits->select('id');
         if (isset($query[0]) && is_array($query)) {
             $this->audits->where('(source LIKE "%' . $query[0] . '%" OR event LIKE "%' . $query[0] . '%") AND user_id != 0');
-            $this->audits->limit(0, $page);
         } else {
             $this->audits->where('user_id != 0');
         }

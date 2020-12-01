@@ -12,6 +12,7 @@
         "michalsn/codeigniter4-uuid": "^1.0@beta",
         "giggsey/libphonenumber-for-php": "^8.12",
         "fakerphp/faker": "^1.10",
+        "erusev/parsedown": "^1.7",
         "filp/whoops": "^2.9",
         "tecnickcom/tcpdf": "^6.3",
         "firebase/php-jwt": "^5.2",
