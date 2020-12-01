@@ -67,7 +67,7 @@ class BaseSettings
 
 		//return $this->session->get($this->config->sessionUserId) ?? 0;
 		//@todo Bug refresh F5 not defined  method get
-		return service('session')->get(config('settings')->sessionUserId) ?? 0;
+		return service('session')->get(config('Settings')->sessionUserId) ?? 0;
 	}
 
 	// fetches the setting template from the settings table and handles errors
@@ -117,7 +117,7 @@ class BaseSettings
 			return cache()->delete($key);
 
 		//if ($duration = $this->config->cacheDuration)
-		if ($duration = config('settings')->cacheDuration)
+		if ($duration = config('Settings')->cacheDuration)
 			cache()->save($key, $content, $duration);
 		return $content;
 	}

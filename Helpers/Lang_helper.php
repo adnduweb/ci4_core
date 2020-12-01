@@ -36,10 +36,10 @@ if (!function_exists('save_lang_file')) {
 
         if (!is_file($path)) {
             // Create the folder...
-            $folder = basename($path) == 'language' ? "{$path}/{$language}" : dirname($path);
+            $folder = basename($path) == 'Language' ? "{$path}/{$language}" : dirname($path);
             if (!is_dir($folder)) {
                 mkdir($folder);
-                $path = basename($path) == 'language' ? "{$folder}/{$module}_lang.php" : $path;
+                $path = basename($path) == 'Language' ? "{$folder}/{$module}_lang.php" : $path;
             }
         }
 
@@ -88,7 +88,7 @@ if (!function_exists('search_text_lang')) {
             return false;
         }
 
-        $localefolder = APPPATH . "language/" . $language . "/";
+        $localefolder = APPPATH . "Language/" . $language . "/";
         $filestoexplore = array();
 
         foreach (scandir($localefolder) as $d) {
@@ -101,7 +101,7 @@ if (!function_exists('search_text_lang')) {
 
         // print_r($filestoexplore);
         // exit;
-        helper('string');
+        helper('String');
         $ret = array();
         $query = stringCleanUrl($query);
         // Recherche du texte
