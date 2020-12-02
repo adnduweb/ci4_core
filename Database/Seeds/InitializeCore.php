@@ -464,7 +464,7 @@ class InitializeCore extends \CodeIgniter\Database\Seeder
             [
                 'name'       => 'setting_supportedLocales',
                 'scope'      => 'global',
-                'content'    => 'a:1:{i:0;s:4:"1|fr";}',
+                'content'    => '["1|fr","2|en"]',
                 'protected'  => '0',
                 'summary'    => '',
             ],

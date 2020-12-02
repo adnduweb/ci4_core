@@ -1,6 +1,7 @@
 <?php
 
 if (!function_exists('convertisseurTime')) {
+
     function convertisseurTime($Time)
     {
         if ($Time < 3600) {
