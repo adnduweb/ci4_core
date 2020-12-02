@@ -155,6 +155,9 @@ return [
 	'cache_vide' => 'Le cache a bien été vidé.',
 	'cache_page_vide' => 'Le cache de la page a bien été vidé.',
 	'weeks ago' =>  'il y a {0, number} semaines',
+	'session_encours' => 'Session en cours',
+	'tab_permissions' => 'Perimissions',
+	'edit_users' => 'Modifier l\'utilisateur',
 ];
 
 /* write : 11/05/2020 13:13:17 */
