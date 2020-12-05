@@ -3,26 +3,28 @@
 namespace Adnduweb\Ci4Core\Config;
 
 use CodeIgniter\Config\BaseService;
-//use CodeIgniter\Database\ConnectionInterface;
+use CodeIgniter\Session\SessionInterface;
 use Adnduweb\Ci4Core\Models\LanguageModel;
 use Adnduweb\Ci4Core\Config\Thumbnails as ThumbnailsConfig;
 use Adnduweb\Ci4Core\Core\Thumbnails;
 use Adnduweb\Ci4Core\Core\BaseVisits;
+use Adnduweb\Ci4Core\Config\Settings as SettingsConfig;
+use Adnduweb\Ci4Core\Models\SettingModel;
+use Adnduweb\Ci4Core\Core\BaseSettings;
 
 class Services extends BaseService
 {
-    public static function settings(BaseConfig $config = null, bool $getShared = true)
+    public static function settings(SettingsConfig $config = null, SettingModel $model = null, SessionInterface $session = null, bool $getShared = true)
     {
 		if ($getShared):
-			return static::getSharedInstance('settings', $config);
+			return static::getSharedInstance('settings', $model, $session, $config);
 		endif;
 
-		// If no config was injected then load one
-		// Prioritizes app/Config if found
-		if (empty($config))
-			$config = config('Settings');
-
-		return new \Adnduweb\Ci4Core\Core\BaseSettings($config);
+		return new BaseSettings(
+			$config ?? config('Settings'),
+			$model ?? model(SettingModel::class),
+			$session ?? service('session')
+		);
 	}
 
 	public static function audits(BaseConfig $config = null, bool $getShared = true)
