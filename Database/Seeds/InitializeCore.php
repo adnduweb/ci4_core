@@ -275,9 +275,9 @@ class InitializeCore extends \CodeIgniter\Database\Seeder
             [
                 'name'       => 'setting_naneApp',
                 'scope'      => 'global',
-                'content'    => '1.7.6',
+                'content'    => 'SpreadAurora',
                 'protected'  => '0',
-                'summary'    => 'Last version Adnduweb',
+                'summary'    => '',
             ],
             [
                 'name'       => 'setting_id_lang',
@@ -1339,8 +1339,8 @@ class InitializeCore extends \CodeIgniter\Database\Seeder
                 'adresse2'         => '',
                 'ville'            => 'Houston',
                 'code_postal'      => '2456 67',
-                'telephone_fixe'   => '+33684521245',
-                'telephone_mobile' => '+33684521245',
+                'phone'            => '+33684521245',
+                'phone_mobile'     => '+33684521245',
                 'fax'              => '+33684521245',
                 'siret'            => '78979907890',
                 'ape'              => 'z4567',

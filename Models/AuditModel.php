@@ -3,13 +3,14 @@
 namespace Adnduweb\Ci4Core\Models;
 
 use CodeIgniter\Model;
+use Adnduweb\Ci4Core\Entities\Audit;
 
 class AuditModel extends Model
 {
     protected $table      = 'audits';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'object';
+    protected $returnType     = Audit::class;
     protected $localizeFile   = 'Adnduweb\Ci4Core\Models\AuditModel';
     protected $useSoftDeletes = false;
 
@@ -20,46 +21,60 @@ class AuditModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
-    protected $searchKtDatatable  = ['source', 'user_id', 'event'];
+    protected $searchKtDatatable  = ['source', 'user_id', 'event', 'data'];
+    protected $fieldEncode  = ['data'];
 
     public function __construct()
     {
         parent::__construct();
-        $this->audits = $this->db->table('audits');
+        $this->builder = $this->db->table('audits');
     }
  
     public function getAllList(int $page, int $perpage, array $sort, array $query)
     {
-        $this->audits->select();
-        $this->audits->select('created_at as date_create_at');
+        $this->builder->select();
+        $this->builder->select('created_at as date_create_at');
         if (isset($query[0]) && is_array($query)) {
-            $this->audits->where('(source LIKE "%' . $query[0] . '%" OR event LIKE "%' . $query[0] . '%") AND user_id != 0');
-            $this->audits->limit(0, $page);
+            
+             // On recherches les colonnes
+             $like = '';
+             if (is_array($this->searchKtDatatable) && !empty($this->searchKtDatatable)) {
+ 
+                 $getLike = implode(',', $this->searchKtDatatable);
+                 if (count($this->searchKtDatatable) > 1)
+                     $getLike = $getLike . ',';
+                 $like = str_replace(',', ' LIKE "%' . trim($query[0]) . '%" OR ', $getLike);
+                 $like = ' (' . $like . ') ';
+                 $like = str_replace(' OR )', ')', $like);
+             }
+             $this->builder->where($like);
+             $this->builder->limit(0, $page);
+
         } else {
-            $this->audits->where('user_id != 0');
+            $this->builder->where('user_id != 0');
             $page = ($page == '1') ? '0' : (($page - 1) * $perpage);
-            $this->audits->limit($perpage, $page);
+            $this->builder->limit($perpage, $page);
         }
-        $this->audits->orderBy($sort['field'] . ' ' . $sort['sort']);
+        $this->builder->orderBy($sort['field'] . ' ' . $sort['sort']);
 
-        $groupsRow = $this->audits->get()->getResult();
+        $auditsRow = $this->builder->get()->getResult();
 
-        //echo $this->audits->getCompiledSelect(); exit;
-        return $groupsRow;
+        //echo $this->builder->getCompiledSelect(); exit;
+        return $auditsRow;
     }
 
     public function getAllCount(array $sort, array $query)
     {
-        $this->audits->select('id');
+        $this->builder->select('id');
         if (isset($query[0]) && is_array($query)) {
-            $this->audits->where('(source LIKE "%' . $query[0] . '%" OR event LIKE "%' . $query[0] . '%") AND user_id != 0');
+            $this->builder->where('(source LIKE "%' . $query[0] . '%" OR event LIKE "%' . $query[0] . '%") AND user_id != 0');
         } else {
-            $this->audits->where('user_id != 0');
+            $this->builder->where('user_id != 0');
         }
 
-        $this->audits->orderBy($sort['field'] . ' ' . $sort['sort']);
+        $this->builder->orderBy($sort['field'] . ' ' . $sort['sort']);
 
-        $users = $this->audits->get();
+        $users = $this->builder->get();
         return $users->getResult();
     }
 }

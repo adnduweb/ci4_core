@@ -94,4 +94,18 @@ class Services extends BaseService
 		return new BaseVisits($config);
 	}
 
+	public static function currency(BaseConfig $config = null, bool $getShared = true)
+	{
+		if ($getShared) {
+			return static::getSharedInstance('currency', $config);
+		}
+
+		// If no config was injected then load one
+		if (empty($config)) {
+			$config = config('Currency');
+		}
+
+		return new \Adnduweb\Ci4Core\Core\BaseCurrency($config);
+	}
+
 }
