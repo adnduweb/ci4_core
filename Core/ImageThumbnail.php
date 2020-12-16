@@ -12,7 +12,7 @@ use Adnduweb\Ci4Core\Interfaces\ThumbnailInterface;
 /**
  * Crops and fits a thumbnail from an image
  */
-class BaseImageThumbnail extends BaseHandler implements ThumbnailInterface
+class ImageThumbnail extends BaseHandler implements ThumbnailInterface
 {
 	/**
 	 * Attributes for Tatter\Handlers
@@ -56,6 +56,7 @@ class BaseImageThumbnail extends BaseHandler implements ThumbnailInterface
 	 */
 	public function create(File $file, string $output, int $imageType, int $width, int $height): bool
 	{
+
 		try
 		{
 			return $this->images

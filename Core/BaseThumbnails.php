@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Adnduweb\Ci4Core\Core;
 
@@ -6,7 +6,7 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Files\Exceptions\FileNotFoundException;
 use CodeIgniter\Files\File;
-use Adnduweb\Ci4Core\Handlers;
+use Adnduweb\Ci4Core\Core\ImageThumbnail;
 use Adnduweb\Ci4Core\Config\Thumbnails as ThumbnailsConfig;
 use Adnduweb\Ci4Core\Exceptions\ThumbnailsException;
 use Adnduweb\Ci4Core\Interfaces\ThumbnailInterface;
@@ -44,20 +44,6 @@ class BaseThumbnails
 	protected $imageType;
 
 	/**
-	 * Overriding name of a handler to use.
-	 *
-	 * @var string|null
-	 */
-	protected $handler;
-
-	/**
-	 * The library for handler discovery.
-	 *
-	 * @var Handlers
-	 */
-	protected $handlers;
-
-	/**
 	 * Initializes the library with its configuration.
 	 *
 	 * @param ThumbnailsConfig|null $config
@@ -65,7 +51,7 @@ class BaseThumbnails
 	public function __construct(ThumbnailsConfig $config = null)
 	{
 		$this->setConfig($config);
-		$this->handlers = new Handlers('Thumbnails');
+		$this->imageThumbnail = new ImageThumbnail();
 	}
 
 	/**
@@ -76,12 +62,10 @@ class BaseThumbnails
 	 */
 	public function reset(): self
 	{
-		foreach (['width', 'height', 'imageType'] as $key)
-		{
+		foreach (['width', 'height', 'imageType'] as $key) {
 			$this->$key = $this->config->$key;
 		}
 
-		$this->handler = null;
 
 		return $this;
 	}
@@ -151,8 +135,7 @@ class BaseThumbnails
 	 */
 	public function setHandler($handler = null): self
 	{
-		if (is_string($handler) && $class = $this->handlers->named($handler))
-		{
+		if (is_string($handler) && $class = $this->handlers->named($handler)) {
 			$handler = new $class();
 		}
 		$this->handler = $handler;
@@ -171,20 +154,9 @@ class BaseThumbnails
 	{
 		$handlers = [];
 
-		// Check all handlers so we can parse the extensions attribute properly
-		foreach ($this->handlers->all() as $class)
-		{
-			$instance = new $class;
-
-			if ($instance->extensions === '*')
-			{
-				$handlers[] = $instance;
-			}
-			elseif (stripos($instance->extensions, $extension) !== false)
-			{
-				// Make sure actual matches get preference over generic ones
-				array_unshift($handlers, $instance);
-			}
+		if (stripos($this->imageThumbnail->attributes['extensions'], $extension) !== false) {
+			// Make sure actual matches get preference over generic ones
+			array_unshift($handlers, $extension);
 		}
 
 		return $handlers;
@@ -207,48 +179,41 @@ class BaseThumbnails
 	{
 		// Validate the file
 		$file = new File($input);
-		if (! $file->isFile())
-		{
+		if (!$file->isFile()) {
 			throw FileNotFoundException::forFileNotFound($input);
 		}
 
 		// Get the file extension
-		if (! $extension = $file->guessExtension() ?? pathinfo($input, PATHINFO_EXTENSION))
-		{
+		if (!$extension = $file->guessExtension() ?? pathinfo($input, PATHINFO_EXTENSION)) {
 			throw new ThumbnailsException(lang('Thumbnails.noExtension'));
 		}
+		
+		// // Determine which handlers to use
+		$extensionExist = $this->matchHandlers($extension);
 
-		// Determine which handlers to use
-		$handlers = $this->handler ? [$this->handler] : $this->matchHandlers($extension);
-
-		// No handlers matched?
-		if (empty($handlers))
-		{
+		// // No handlers matched?
+		if (empty($extensionExist)) {
 			throw new ThumbnailsException(lang('Thumbnails.noHandler', [$extension]));
 		}
 
+		
+
 		// Try each handler until one succeeds
 		$result = false;
-		foreach ($handlers as $handler)
-		{
-			if ($handler->create($file, $output, $this->imageType, $this->width, $this->height))
-			{
+			if ($this->imageThumbnail->create($file, $output, $this->imageType, $this->width, $this->height)) {
 				// Verify the output file
-				if (exif_imagetype($output) === $this->imageType)
-				{
+				if (exif_imagetype($output) === $this->imageType) {
 					$result = true;
-					break;
 				}
 			}
-		}
 
 		$this->reset();
 
-		if (! $result)
-		{
+		if (!$result) {
 			throw new ThumbnailsException(lang('Thumbnails.createFailed', [$input]));
 		}
 
 		return $this;
 	}
+
 }

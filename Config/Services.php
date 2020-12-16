@@ -6,7 +6,6 @@ use CodeIgniter\Config\BaseService;
 use CodeIgniter\Session\SessionInterface;
 use Adnduweb\Ci4Core\Models\LanguageModel;
 use Adnduweb\Ci4Core\Config\Thumbnails as ThumbnailsConfig;
-use Adnduweb\Ci4Core\Core\Thumbnails;
 use Adnduweb\Ci4Core\Core\BaseVisits;
 use Adnduweb\Ci4Core\Config\Settings as SettingsConfig;
 use Adnduweb\Ci4Core\Models\SettingModel;
@@ -50,14 +49,14 @@ class Services extends BaseService
 	 *
 	 * @return Thumbnails
 	 */
-	public static function thumbnails(ThumbnailsConfig $config = null, bool $getShared = true): BaseThumbnails
+	public static function thumbnails(ThumbnailsConfig $config = null, bool $getShared = true)
 	{
 		if ($getShared)
 		{
 			return static::getSharedInstance('thumbnails', $config);
 		}
 
-		return new Thumbnails($config ?? config('Thumbnails'));
+		return new \Adnduweb\Ci4Core\Core\BaseThumbnails($config ?? config('Thumbnails'));
 	}
 
 

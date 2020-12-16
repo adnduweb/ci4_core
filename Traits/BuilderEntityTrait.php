@@ -76,6 +76,24 @@ trait BuilderEntityTrait
     }
 
     /** 
+     * 
+     * Titre 
+     */
+    public function getBTitle()
+    {
+       
+        if (isset($this->{$this->tableLang})) { 
+            foreach ($this->{$this->tableLang} as $lang) {
+                if (service('LanguageOverride')->getIdLocale() == $lang->id_lang) {
+                    return $lang->titre ?? null;
+                }
+            }
+        } else {
+            return $this->attributes['titre'] ?? null;
+        }
+    }
+
+    /** 
      *
      * Deuxième titre 
      */

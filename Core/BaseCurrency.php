@@ -31,7 +31,7 @@ class BaseCurrency
 
         $cacheKey = "currency-getCurrency";
         $content = cache($cacheKey);
-        print_r($content); exit;
+
         if ($content !== null)
             return $content;
 
@@ -74,6 +74,7 @@ class BaseCurrency
 
     public function save()
     {
+       
         $this->conversion_rates =  $this->getCurrency();
 
         $currencyModel = new \Adnduweb\Ci4Core\Models\CurrencyModel;

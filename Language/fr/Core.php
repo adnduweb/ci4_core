@@ -206,7 +206,20 @@ return [
 	'conversion_rate' => 'taux de conversion',
 	'add_currencies' => 'Ajouter une devise',
 	'add_taxes' => 'Ajouter une taxe',
-	'Page rendered in {elapsed_time} seconds' => 'Page affichée en {elapsed_time} secondes'
+	'Page rendered in {elapsed_time} seconds' => 'Page affichée en {elapsed_time} secondes',
+	'edit_navs' => 'Modifier le menu',
+	'Si vous modifier l\'url du <code>Menu/Controller</code> il ne faut pas oublier d\'aller dans le menu route.' => 'Si vous modifier l\'url du Menu/Controller il ne faut pas oublier d\'aller dans le menu route.',
+	'user_profile' => 'Votre compte',
+	'valider votre fiche' => 'Valider votre fiche',
+	'Compte Entreprise' => 'Compte entreprise',
+	'Compte Personnel' => 'Compte Personnel',
+	'Reseaux sociaux' => 'Réseaux sociaux',
+	'change your account settings' => 'modifier les paramètres de votre compte',
+	'setting_reseaux_facebook' => 'Url Facebook',
+	'setting_reseaux_twitter' => 'Url Twitter',
+	'setting_reseaux_instagram' => 'Url Instagram',
+	'setting_reseaux_likedin' => 'Url Linkedin',
+	'setting_reseaux_viadeo' => 'Url Viadéo'
 ];
 
 /* write : 11/05/2020 13:13:17 */

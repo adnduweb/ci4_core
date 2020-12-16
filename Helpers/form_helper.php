@@ -28,7 +28,7 @@ if (!function_exists('form_input_spread')) {
         $html = '<div class="kt-input-icon kt-input-icon--left">';
         if (service('Settings')->setting_activer_multilangue == true) {
 
-            $setting_supportedLocales = unserialize(service('Settings')->setting_supportedLocales);
+            $setting_supportedLocales = json_decode(service('Settings')->setting_supportedLocales);
             if (!empty($setting_supportedLocales) && is_array($setting_supportedLocales)) {
 
                 if ($required == true) {
@@ -151,7 +151,7 @@ if (!function_exists('form_textarea_spread')) {
         $html = '<div class="kt-input-icon kt-input-icon--left textarea">';
         if (service('Settings')->setting_activer_multilangue == true) {
 
-            $setting_supportedLocales = unserialize(service('Settings')->setting_supportedLocales);
+            $setting_supportedLocales = json_decode(service('Settings')->setting_supportedLocales);
             if (!empty($setting_supportedLocales) && is_array($setting_supportedLocales)) {
 
                 if ($required == true) {
