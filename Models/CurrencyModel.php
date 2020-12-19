@@ -3,6 +3,7 @@
 namespace Adnduweb\Ci4Core\Models;
 
 use CodeIgniter\Model;
+use Adnduweb\Ci4Core\Entities\Currency;
 
 class CurrencyModel extends Model
 {
@@ -14,7 +15,7 @@ class CurrencyModel extends Model
     protected $table           = 'currencies';
     protected $tableLang       = false;
     protected $primaryKey      = 'id';
-    protected $returnType      = 'object';
+    protected $returnType      = Currency::class;
     protected $localizeFile    = 'App\Models\CurrencyModel';
     protected $useSoftDeletes  = true;
     protected $allowedFields   = ['name', 'iso_code', 'symbol', 'numeric_iso_code', 'precision', 'conversion_rate', 'deleted', 'active'];

@@ -1121,7 +1121,7 @@ class InitializeCore extends \CodeIgniter\Database\Seeder
             ],
             [
                 'id'        => 18,
-                'id_parent' => 17,
+                'id_parent' => 0,
                 'depth'     => 2,
                 'left'      => 13,
                 'right'     => 14,

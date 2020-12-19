@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Carbon\Traits\Date;
 use DateTimeInterface;
+use CodeIgniter\Model;
 
 trait BaseModel
 {
@@ -43,6 +44,13 @@ trait BaseModel
      * @var array
      */
     protected $dates = [];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $search = [];
 
     /**
      * Indicates whether attributes are snake cased on arrays.
@@ -188,4 +196,132 @@ trait BaseModel
         }
         return false;
     }
+
+    public function ktSearch( string $search){
+
+        foreach ($this->getModels() as $class)
+		{
+            $instance = new $class();
+
+            if(isset($instance->searchTable)){
+
+                if(method_exists($instance, 'search')){
+
+                    //print_r($instance); exit;
+                    $resSearch = $instance->search($search);
+                    $this->search[$class] = $resSearch;
+                }
+                
+            }
+            
+        }
+
+        return $this->search; 
+
+    }
+
+
+    /**
+	 * Load model class names from all namespaces, filtered by group
+	 *
+	 * @return array of model class names
+	 */
+	protected function getModels(): array
+	{
+		$loader  = service('autoloader');
+		$locator = service('locator');
+		$models = [];
+
+		// Get each namespace
+		foreach ($loader->getNamespace() as $namespace => $path)
+		{
+			// Skip namespaces that are ignored
+			if (in_array($namespace, Config('Admin')->ignoredNamespaces))
+			{
+				continue;
+			}
+
+			// Get files under this namespace's "/Models" path
+			foreach ($locator->listNamespaceFiles($namespace, '/Models/') as $file)
+			{
+				if (is_file($file) && pathinfo($file, PATHINFO_EXTENSION) == 'php')
+				{
+					// Load the file
+					require_once $file;
+				}
+			}
+		}
+
+		// Filter loaded class on likely models
+        $classes = preg_grep('/model$/i', get_declared_classes());
+        
+        //print_r($classes); exit;
+		
+		// Try to load each class
+		foreach ($classes as $class)
+		{
+			// Check for ignored namespaces
+			foreach (Config('Admin')->ignoredNamespaces as $namespace)
+			{
+				if (strpos($class, $namespace) === 0)
+				{
+					continue 2;
+				}
+            }
+
+			// Make sure it's really a model
+			if (! is_a($class, Model::class, true))
+			{
+                echo $class; 
+				continue;
+			}
+
+			// Try to instantiate
+			try
+			{
+				$instance = new $class();
+			}
+			catch (\Exception $e)
+			{
+                continue;
+            }
+           
+			
+			// Make sure it has a valid table
+			$table = $instance->table;
+			if (empty($table))
+			{
+				continue;
+			}
+			
+			// Filter by group
+			$group = $instance->DBGroup ?? $this->defaultGroup;
+			if (empty($this->group) || $group == $this->group)
+			{
+				$models[] = $class;
+			}
+			unset($instance);
+		}
+		
+		return $models;
+	}
+
+    /**
+	 * Return a database object name without its prefix.
+	 *
+	 * @param string    $str  Name of a database object
+	 *
+	 * @return string   The updated name
+	 */
+	protected function stripPrefix(string $str): string
+	{
+		if (empty($str) || empty($this->prefix))
+		{
+			return $str;
+		}
+
+		// Strip the first occurence of the prefix
+		return preg_replace("/^{$this->prefix}/", '', $str, 1);
+    }
+    
 }

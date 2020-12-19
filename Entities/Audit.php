@@ -6,7 +6,13 @@ use CodeIgniter\Entity;
 
 class Audit extends Entity
 {	
-	protected $dates = ['created_at'];
+    protected $dates = ['created_at'];
+    
+    public function getIdItem()
+	{
+		return $this->attributes['id'] ?? null;
+    }
+    
 	
 	public function setData()
     {

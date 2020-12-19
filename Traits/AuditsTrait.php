@@ -81,7 +81,7 @@ trait AuditsTrait
 			return false;
 
 		$audit = [
-			'source'    => $this->localizeFile,
+			'source'    => $this->table,
 			'event'     => 'delete',
 			'summary'   => ($data['purge'])? 'purge' : 'soft',
 		];

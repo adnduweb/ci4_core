@@ -17,7 +17,7 @@ class TaxeModel extends Model
     protected $with            = ['taxes_langs'];
     protected $without         = [];
     protected $primaryKey      = 'id';
-    protected $primaryKeyLang  = 'taxe_id';
+    protected $primaryKeyLang  = 'taxe_id'; 
     protected $returnType      = Taxe::class;
     protected $localizeFile    = 'App\Models\TaxeModel';
     protected $useSoftDeletes  = true;

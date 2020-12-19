@@ -15,4 +15,9 @@ class Currency extends Entity
      */
     protected $casts = [];
 
+    public function getIdItem()
+	{
+		return $this->attributes['id'] ?? null;
+	}
+
 }

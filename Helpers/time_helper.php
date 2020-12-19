@@ -39,25 +39,25 @@ if (!function_exists('timeAgo')) {
         switch ($time):
                 // seconds
             case $time <= 60:
-                return lang('Admin.ago') . ' ' . lang('Admin.lessthan_a_minutes_ago');
+                return lang('Core.ago') . ' ' . lang('Core.lessthan_a_minutes_ago');
                 // minutes
             case $time >= 60 && $time < 3600:
-                return (round($time / 60) === 1) ? lang('Admin.ago') . ' ' . lang('Admin.a_minute') : lang('Admin.ago') . ' ' . round($time / 60) . ' ' . lang('Admin.minutes');
+                return (round($time / 60) === 1) ? lang('Core.ago') . ' ' . lang('Core.a_minute') : lang('Core.ago') . ' ' . round($time / 60) . ' ' . lang('Core.minutes');
                 // hours
             case $time >= 3600 && $time < 86400:
-                return (round($time / 3600) === 1) ? lang('Admin.ago') . ' ' . lang('Admin.a_hour') : lang('Admin.ago') . ' ' . round($time / 3600) . ' ' . lang('Admin.hours');
+                return (round($time / 3600) === 1) ? lang('Core.ago') . ' ' . lang('Core.a_hour') : lang('Core.ago') . ' ' . round($time / 3600) . ' ' . lang('Core.hours');
                 // days
             case $time >= 86400 && $time < 604800:
-                return (round($time / 86400) === 1) ? lang('Admin.ago') . ' ' . lang('Admin.a_day') : lang('Admin.ago') . ' ' . round($time / 86400) . ' ' . lang('Admin.jours');
+                return (round($time / 86400) === 1) ? lang('Core.ago') . ' ' . lang('Core.a_day') : lang('Core.ago') . ' ' . round($time / 86400) . ' ' . lang('Core.days');
                 // weeks
             case $time >= 604800 && $time < 2600640:
-                return (round($time / 604800) === 1) ? lang('Admin.ago') . ' ' . lang('Admin.a_week') : lang('Admin.ago') . ' ' . round($time / 604800) . ' ' . lang('Admin.weeks');
+                return (round($time / 604800) === 1) ? lang('Core.ago') . ' ' . lang('Core.a_week') : lang('Core.ago') . ' ' . round($time / 604800) . ' ' . lang('Core.weeks');
                 // months
             case $time >= 2600640 && $time < 31207680:
-                return (round($time / 2600640) === 1) ? lang('Admin.ago') . ' ' . lang('Admin.a_month') : lang('Admin.ago') . ' ' . round($time / 2600640) . ' ' . lang('Admin.months');
+                return (round($time / 2600640) === 1) ? lang('Core.ago') . ' ' . lang('Core.a_month') : lang('Core.ago') . ' ' . round($time / 2600640) . ' ' . lang('Core.months');
                 // years
             case $time >= 31207680:
-                return (round($time / 31207680) === 1) ? lang('Admin.ago') . ' ' . lang('Admin.a_year') : lang('Admin.ago') . ' ' . round($time / 31207680) . ' ' . lang('Admin.years');
+                return (round($time / 31207680) === 1) ? lang('Core.ago') . ' ' . lang('Core.a_year') : lang('Core.ago') . ' ' . round($time / 31207680) . ' ' . lang('Core.years');
 
         endswitch;
     }
