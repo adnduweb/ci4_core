@@ -204,17 +204,3 @@ if (!function_exists('getLinkPage')) {
 		}
 	}
 }
-
-if (!function_exists('assetAdmin')) {
-	/**
-	 * Generate an asset path for the application.
-	 *
-	 * @param  string  $path
-	 * @param  bool|null  $secure
-	 * @return string
-	 */
-	function assetAdmin($path)
-	{
-		return base_url('admin/themes/' . service('settings')->setting_theme_admin . '/assets/' . $path);
-	}
-}

@@ -272,8 +272,7 @@ trait BaseModel
 			// Make sure it's really a model
 			if (! is_a($class, Model::class, true))
 			{
-                echo $class; 
-				continue;
+                continue;
 			}
 
 			// Try to instantiate
