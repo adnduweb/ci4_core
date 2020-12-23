@@ -249,7 +249,11 @@ return [
 	'weeks' => 'semaines',
 	'months' => 'mois',
 	'years' => 'années', 
-	'lessthan_a_minutes_ago' => 'moins d\'une minute'
+	'lessthan_a_minutes_ago' => 'moins d\'une minute',
+	'name_short_app' => 'Nom court', 
+	'desc_app' => 'Descriptionde l\'application', 
+	'activer_manifest' => 'Activer le manifest pour les applications PWA', 
+	'activer_services_workers' => 'Acriver le hors connexion', 
 	
 ];
 
