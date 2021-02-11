@@ -28,10 +28,49 @@ if (!function_exists('detectBrowser')) {
 
         if ($html === true) {
             return strtolower(str_replace(['-', '', ' ', '.'], ['_'], $currentAgent))
-            . ' version_' .  strtolower(str_replace(['-', '', ' ', '.'], ['_'], $agent->getVersion()))
-            . ' ' . strtolower(str_replace(['-', '', ' ', '.'], ['_'], $agent->getPlatform())) . ' ' . $support;
+                . ' version_' .  strtolower(str_replace(['-', '', ' ', '.'], ['_'], $agent->getVersion()))
+                . ' ' . strtolower(str_replace(['-', '', ' ', '.'], ['_'], $agent->getPlatform())) . ' ' . $support;
         } else {
             return $agent;
+        }
+    }
+}
+
+if (!function_exists('detectBrowser')) {
+
+    function getCountryByIp($ip)
+    {
+        try {
+            $xml = file_get_contents(
+                "http://www.geoplugin.net/json.gp?ip=" . $ip
+            );
+        } catch (Exception $exception) {
+            $xml = null;
+        }
+
+        if (isset($xml)) {
+            $ipdat = @json_decode($xml);
+        } else {
+            $xml = null;
+        }
+
+
+        if ($xml != null and isset($ipdat->geoplugin_countryName)) {
+            return array(
+                'country' => $ipdat->geoplugin_countryName,
+                'code' => $ipdat->geoplugin_currencyCode,
+                'city' => $ipdat->geoplugin_city,
+                'lat' => $ipdat->geoplugin_latitude,
+                'lang' => $ipdat->geoplugin_longitude, 'flag' => true
+            );
+        } else {
+            return array(
+                'country' => '',
+                'code' => '',
+                'city' => '',
+                'lat' => '',
+                'lang' => '', 'flag' => false
+            );
         }
     }
 }

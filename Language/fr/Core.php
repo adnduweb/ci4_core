@@ -254,7 +254,17 @@ return [
 	'desc_app' => 'Descriptionde l\'application', 
 	'activer_manifest' => 'Activer le manifest pour les applications PWA', 
 	'activer_services_workers' => 'Acriver le hors connexion', 
-	
+	'user_notification' => 'Notifications',
+	'alerts' => 'Alerts',
+	'events' => 'Evénement',
+	'logs' => 'Logs',
+	'no_new_notifications' => 'Pas de nouvelles notifications', 
+	'Mailchimp' => 'Mailchimp',
+	'SendinBlue' => 'SendinBlue',
+	'Search...' => 'Rechercher' , 
+	'key_api' => 'Clé API',
+	'generer_key_api' => 'Générez une clé API',
+	'not_key_api_authorized' => 'La clé api n\'est pas autorisée'
 ];
 
 /* write : 11/05/2020 13:13:17 */

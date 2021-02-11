@@ -109,4 +109,8 @@ class Services extends BaseService
 		return new \Adnduweb\Ci4Core\Core\BaseCurrency($config);
 	}
 
+	public static function getSecretKey(){
+		return getenv('JWT_SECRET_KEY');
+	} 
+
 }
