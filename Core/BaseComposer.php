@@ -3,7 +3,7 @@
 namespace Adnduweb\Ci4Core\Core;
 
 use Exception;
-use Adnduweb\Ci4Core\Helpers\CliHelper;
+use Adnduweb\Ci4Core\Helpers\FileHelper;
 
 abstract class BaseComposer extends \Composer\Installer\LibraryInstaller
 {
@@ -42,7 +42,7 @@ abstract class BaseComposer extends \Composer\Installer\LibraryInstaller
         {
             try
             {
-                CliHelper::copy($source, $target);
+                FileHelper::copy($source, $target);
             }
             catch(Exception $e)
             {
@@ -57,7 +57,7 @@ abstract class BaseComposer extends \Composer\Installer\LibraryInstaller
         {
             try
             {
-                CliHelper::setPermission($file, $permission);
+                FileHelper::setPermission($file, $permission);
             }
             catch(Exception $e)
             {
