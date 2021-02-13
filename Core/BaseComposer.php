@@ -7,9 +7,7 @@ use Adnduweb\Ci4Core\Helpers\FileHelper;
 
 abstract class BaseComposer extends \Composer\Installer\LibraryInstaller
 {
-    /**
-    * Create Project
-    */
+
     public static function postCreateProject($event)
     {
         static::runCommands($event, 'Adnduweb\Ci4Core\Core\BaseComposer::postCreateProject');

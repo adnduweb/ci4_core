@@ -11,7 +11,7 @@ class FileHelper
     {
         if ($throwExceptions)
         {
-            throw new Exception($error);
+            throw new Exception($error, $throwExceptions);
         }
 
         return false;
@@ -35,14 +35,14 @@ class FileHelper
             {
                 $error = $path . ' chmod ' . $permission . ' error.';
             
-                return static::_returnFalse($error, $throwExceptions);
+                return self::_returnFalse($error, $throwExceptions);
             }
         }
         else
         {
             $error = $path . ' path not found.';
 
-            return static::_returnFalse($error);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         return true;
@@ -56,7 +56,7 @@ class FileHelper
             {
                 $error = 'Can\'t delete: ' . $dir;
 
-                return static::_returnFalse($error, $throwExceptions);
+                return self::_returnFalse($error, $throwExceptions);
             }
 
             return true;
@@ -64,21 +64,21 @@ class FileHelper
 
         if (!is_dir($dir))
         {
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
-        $items = static::readDirectory($dir, $throwExceptions, $error);
+        $items = self::readDirectory($dir, $throwExceptions, $error, $throwExceptions);
 
         if ($items === false)
         {
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         foreach($items as $file)
         {
-            if (!static::delete($dir . DIRECTORY_SEPARATOR . $file, $error))
+            if (!self::delete($dir . DIRECTORY_SEPARATOR . $file, $error, $throwExceptions))
             {
-                return static::_returnFalse($error, $throwExceptions);
+                return self::_returnFalse($error, $throwExceptions);
             }
         }
 
@@ -86,7 +86,7 @@ class FileHelper
         {
             $error = 'Can\'t delete directory: '. $dir; 
 
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         return true;
@@ -103,11 +103,11 @@ class FileHelper
         
         if ($recursive && !is_dir($parentDir) && $parentDir !== $path)
         {
-            $result = static::createDirectory($parentDir, $mode, true, $throwExceptions, $error);
+            $result = self::createDirectory($parentDir, $mode, true, $throwExceptions, $error, $throwExceptions);
 
             if (!$result)
             {
-                return static::_returnFalse($error, $throwExceptions);
+                return self::_returnFalse($error, $throwExceptions);
             }
         }
         
@@ -117,7 +117,7 @@ class FileHelper
             {
                 $error = $path . ' mkdir error.';
 
-                static::_returnFalse($error, $throwExceptions);
+                self::_returnFalse($error, $throwExceptions);
             }
         }
         catch(Exception $e)
@@ -126,25 +126,25 @@ class FileHelper
             {
                 $error = "Failed to create directory \"$path\": " . $e->getMessage();
 
-                return static::_returnFalse($error, $throwExceptions);
+                return self::_returnFalse($error, $throwExceptions);
             }
         }
 
-        return static::setPermission($path, $mode, $throwExceptions, $error);
+        return self::setPermission($path, $mode, $throwExceptions, $error, $throwExceptions);
     }
 
     public static function copySymlink($source, $dest, $throwExceptions = true, &$error = null)
     {
         if (!is_link($source))
         {
-            return static::_returnFalse($source . ' not symlink.', $throwExceptions);
+            return self::_returnFalse($source . ' not symlink.', $throwExceptions);
         }
 
         if (!symlink(readlink($source), $dest))
         {
             $error = 'Can\'t create symlink from ' . $source . ' to ' . $dest;
 
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         return true;
@@ -154,7 +154,7 @@ class FileHelper
     {
         if (!is_file($source))
         {
-            return static::_returnFalse($source . ' not file.', $throwExceptions);
+            return self::_returnFalse($source . ' not file.', $throwExceptions);
         }
 
         $dir = pathinfo($dest, PATHINFO_DIRNAME);
@@ -163,19 +163,19 @@ class FileHelper
         {
             $error = 'Can\'t get PATHINFO_DIRNAME: ' . $dest;
 
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
-        if (!static::createDirectory($dir, $permission, true, $throwExceptions, $error))
+        if (!self::createDirectory($dir, $permission, true, $throwExceptions, $error, $throwExceptions))
         {
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         if (!copy($source, $dest))
         {
             $error = 'Can\'t copy file from ' . $source . ' to ' . $dest;
 
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         return true;
@@ -185,24 +185,24 @@ class FileHelper
     {
         if (!is_dir($dest))
         {        
-            if (!static::createDirectory($dest, $permission, true, $throwExceptions, $error))
+            if (!self::createDirectory($dest, $permission, true, $throwExceptions, $error, $throwExceptions))
             {
-                return static::_returnFalse($error, $throwExceptions);
+                return self::_returnFalse($error, $throwExceptions);
             }
         }
 
-        $items = static::readDirectory($source, $throwExceptions, $error);
+        $items = self::readDirectory($source, $throwExceptions, $error, $throwExceptions);
 
         if ($items === false)
         {
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         foreach($items as $file)
         {
-            if (!static::copy($source . DIRECTORY_SEPARATOR . $file, $dest . DIRECTORY_SEPARATOR . $file, $permission, $throwExceptions, $error))
+            if (!self::copy($source . DIRECTORY_SEPARATOR . $file, $dest . DIRECTORY_SEPARATOR . $file, $permission, $throwExceptions, $error, $throwExceptions))
             {
-                return static::_returnFalse($error, $throwExceptions);
+                return self::_returnFalse($error, $throwExceptions);
             }
         }
 
@@ -213,22 +213,22 @@ class FileHelper
     {
         if (is_link($source))
         {
-            return static::copySymlink($source, $dest);
+            return self::copySymlink($source, $dest);
         }
 
         if (is_file($source))
         {
-            return static::copyFile($source, $dest, $permission, $throwExceptions, $error);
+            return self::copyFile($source, $dest, $permission, $throwExceptions, $error, $throwExceptions);
         }
 
         if (is_dir($source))
         {
-            return static::copyDirectory($source, $dest, $permission, $throwExceptions, $error);
+            return self::copyDirectory($source, $dest, $permission, $throwExceptions, $error, $throwExceptions);
         }
 
         $error = 'File not found: ' . $source;
 
-        return static::_returnFalse($error, $throwExceptions);
+        return self::_returnFalse($error, $throwExceptions);
     }
 
     public static function readDirectory($source, $throwExceptions = true, &$error = null)
@@ -239,7 +239,7 @@ class FileHelper
         {
             $error = 'Can\'t open directory: ' . $dir;
 
-            return static::_returnFalse($error, $throwExceptions);
+            return self::_returnFalse($error, $throwExceptions);
         }
 
         $items = [];
