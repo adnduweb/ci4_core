@@ -16,8 +16,10 @@ class FileHelper
 
         return false;
     }
-    
 
+    /**
+     * 
+     */
     public static function setPermission($path, $permission, $throwExceptions = true, &$error = null)
     {
         if (is_file($path) || is_dir($path))
