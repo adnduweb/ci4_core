@@ -1,5 +1,5 @@
 {
-    "name": "adnduweb/ci4_core",
+    "name": "adnduweb/ci4-core",
     "license": "MIT",
     "description": "An Example of CodeIgniter 4 Core module Doutony",
     "autoload": {
